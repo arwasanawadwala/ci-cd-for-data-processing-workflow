@@ -55,3 +55,4 @@ steps:
   - name: gcr.io/cloud-builders/gcloud
     args: ['composer', 'environments', 'run', '${_COMPOSER_ENV_NAME}', '--location', '${_COMPOSER_REGION}', 'trigger_dag', '--', '${_COMPOSER_DAG_NAME_TEST}', '--run_id=$BUILD_ID']
     id: 'trigger-pipeline-execution'
+
