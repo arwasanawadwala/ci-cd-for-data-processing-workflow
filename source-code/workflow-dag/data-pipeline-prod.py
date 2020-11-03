@@ -14,6 +14,7 @@
 """Data processing production workflow definition.
 """
 import datetime
+
 from airflow import models
 from airflow.contrib.operators.dataflow_operator import DataFlowJavaOperator
 
@@ -50,14 +51,14 @@ with models.DAG(
     'prod_word_count',
     schedule_interval=None,
     default_args=default_args) as dag:
-  dataflow_execution = DataFlowJavaOperator(
-      task_id='wordcount-run',
-      jar=dataflow_jar_location,
-      start_date=yesterday,
-      options={
-          'autoscalingAlgorithm': 'THROUGHPUT_BASED',
-          'maxNumWorkers': '3',
-          'inputFile': input_bucket+'/input.txt',
-          'output': output_bucket+'/'+output_prefix
-      }
-  )
+    dataflow_execution = DataFlowJavaOperator(
+        task_id='wordcount-run',
+        jar=dataflow_jar_location,
+        start_date=yesterday,
+        options={
+            'autoscalingAlgorithm': 'THROUGHPUT_BASED',
+            'maxNumWorkers': '3',
+            'inputFile': input_bucket + '/input.txt',
+            'output': output_bucket + '/' + output_prefix
+        }
+    )
